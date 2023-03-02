@@ -1,3 +1,4 @@
+// import ethers
 import {
   Textarea,
   Input,
@@ -20,16 +21,27 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton
+  ModalCloseButton,
+  InputLeftAddon,
+  InputGroup,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
 } from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
+import {abi} from './abi';
 
 export default function Home() {
 
-  const {isOpen, onOpen, onClose} = useDisclosure();
+  const {onClose} = useDisclosure();
+  const [name, setName] = useState('');
+  const [ammount, setAmmount] = useState(1);
+  const [message, setMessage] = useState('');
   const [hasMetamask, setHasMetamask] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
-  const [signer, setSigner] = useState(undefined);
+  const [isSuccessful, setIsSuccessful] = useState(false);
 
   useEffect(() => {
     if (typeof window.ethereum !== 'undefined') {
@@ -52,10 +64,20 @@ export default function Home() {
       }
     }
     async function donate() {
-      console.log("Success!")
+      const address = '0xDC8bB5D70939427AF4b9b0B93D4eCb4c6a377fc8';
+      const _abi = abi;
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(address, _abi, signer);
+      const tx = await contract.donate(message, name, {value: 0});
+      await tx.wait();
+      console.log('Transaction confirmed');
+      setIsSuccessful(true);
+      // contract address 
     }
   return (
     <>
+    <title>Buy Me MOMO 🥟</title>
       {
         hasMetamask ? (
           isConnected ? (
@@ -92,7 +114,7 @@ export default function Home() {
         )
       }
 
-      {isConnected ? (<div style = {{
+      {isConnected ? (<form onSubmit = {() => donate()}style = {{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -105,21 +127,41 @@ export default function Home() {
               <CardBody>
                 <Stack divider={<StackDivider />} spacing='4'>
                   <Box>
-                    <Input placeholder="From" />
+                    <InputGroup>
+                      <InputLeftAddon children='From' />
+                      <Input 
+                      value = {name} 
+                      onChange={(e) => setName(e.target.value)} 
+                      placeholder="Anonymous" />
+                    </InputGroup>
                   </Box>
                   <Box>
-                    <Input placeholder="Ammount" />
+                    <NumberInput 
+                    default={1}
+                    min={1} 
+                    onChange={setAmmount}
+                    >
+                      <NumberInputField placeholder='Görli'/>
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                      </NumberInputStepper>
+                    </NumberInput>
                   </Box>
                   <Box>
-                    <Textarea resize='None' placeholder="Message" />
-                  </Box>
+                    <Textarea 
+                    value = {message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    resize='None' 
+                    placeholder="Message" />
+                  </Box>  
                   <Box align='center'>
-                    <Button colorScheme="teal" variant="outline" onClick={() => donate()}>LEST GO!</Button>
+                    <Button colorScheme="teal" variant="outline" type="submit">LEST GO!</Button>
                   </Box>
                 </Stack>
               </CardBody>
             </Card>
-          </div>) : ""}
+          </form>) : ""}
     </>
   )
 }
