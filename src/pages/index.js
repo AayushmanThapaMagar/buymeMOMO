@@ -30,12 +30,15 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper
 } from '@chakra-ui/react';
+
+import{ethers} from 'ethers';
 import {useEffect, useState} from 'react';
 import {abi} from './abi';
 
 export default function Home() {
 
   const {onClose} = useDisclosure();
+  const [isLoading, setIsLoading] = useSt(false);
   const [name, setName] = useState('');
   const [ammount, setAmmount] = useState(1);
   const [message, setMessage] = useState('');
@@ -64,15 +67,16 @@ export default function Home() {
       }
     }
     async function donate() {
-      const address = '0xDC8bB5D70939427AF4b9b0B93D4eCb4c6a377fc8';
+      setIsLoading(true);
+      const address = '0xD51Bf6225B1f84c57f3A4F5FA73d86D5E5385837';
       const _abi = abi;
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(address, _abi, signer);
-      const tx = await contract.donate(message, name, {value: 0});
+      const tx = await contract.donate(name, message, {value: ethers.utils.parseEther(ammount.toString())});
       await tx.wait();
-      console.log('Transaction confirmed');
       setIsSuccessful(true);
+      setIsLoading(false);
       // contract address 
     }
   return (
@@ -156,7 +160,13 @@ export default function Home() {
                     placeholder="Message" />
                   </Box>  
                   <Box align='center'>
-                    <Button colorScheme="teal" variant="outline" type="submit">LEST GO!</Button>
+                    <Button
+                    isLoading = {isLoading}
+                    colorScheme="teal" 
+                    variant="outline" 
+                    onClick={()=>donate()}>
+                      LETS GO!
+                      </Button>
                   </Box>
                 </Stack>
               </CardBody>
