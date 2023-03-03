@@ -38,7 +38,7 @@ import {abi} from './abi';
 export default function Home() {
 
   const {onClose} = useDisclosure();
-  const [isLoading, setIsLoading] = useSt(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [ammount, setAmmount] = useState(1);
   const [message, setMessage] = useState('');
