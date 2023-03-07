@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.18;
+pragma solidity 0.8.19;
 
-contract donut {
+contract momo {
     uint256 public totalDonations;
-    address public onion;
+    address public owner;
 
     struct donation {
         address Addr;
@@ -15,8 +15,8 @@ contract donut {
     
     donation[] private donations;
 
-    constructor() {
-        onion = payable(msg.sender);
+    constructor(address _owner) {
+        owner = payable(_owner);
     }
 
     function donate(string memory _message, string memory _name) external payable {
@@ -24,16 +24,16 @@ contract donut {
         donations.push(donation(msg.sender, _name, _message, msg.value));
     }
 
-    function withdraw() external onlyOnion {
-        (bool success, ) = payable(onion).call{value: address(this).balance}("");
-        require(success, "Only Onion");
+    function withdraw() external onlyOwner {
+        (bool success, ) = payable(owner).call{value: address(this).balance}("");
+        require(success, "Not Owner");
     }
 
     function getDonations() external view returns (donation[] memory) {
         return donations;
     }
-    modifier onlyOnion() {
-        require(msg.sender == onion);
+    modifier onlyOwner() {
+        require(msg.sender == owner);
         _;
     }
     receive() external payable {

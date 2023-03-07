@@ -1,0 +1,93 @@
+{
+	"compiler": {
+		"version": "0.8.19+commit.7dd6d404"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "createContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "donationContracts",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getDeployedContract",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/factory.sol": "factory"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/factory.sol": {
+			"keccak256": "0xf705598dd0b2d04401112ae6c2aa775936e8ee3293a57c4c76d9f6a032528c07",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5b48f06c5d96b91d71ce128ce586494975a5ba692697dbe809c8cada4cd9f391",
+				"dweb:/ipfs/QmPJLnrUFRQtAiz7LstCdaqquraLATGKTARAccbma3tmky"
+			]
+		},
+		"contracts/momo.sol": {
+			"keccak256": "0x1da11e16e471d420a8756f6e8d0055f324e564a2ce6a36a43e14f55eb4457f6d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://50057cfe1b3d454647a17d7b4f2effbb648c8a8196882244baac9447c2fe5e39",
+				"dweb:/ipfs/QmfAJJbfB5p8P9VSpF9MZ6TM7tuFwVLrvb1ZhBjbPRV9C4"
+			]
+		}
+	},
+	"version": 1
+}
