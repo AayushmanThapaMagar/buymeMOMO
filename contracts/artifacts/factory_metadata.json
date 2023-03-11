@@ -20,7 +20,26 @@
 						"type": "address"
 					}
 				],
-				"name": "donationContracts",
+				"name": "deployedContracts",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "getDeployedContract",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -73,11 +92,11 @@
 	},
 	"sources": {
 		"contracts/factory.sol": {
-			"keccak256": "0xf705598dd0b2d04401112ae6c2aa775936e8ee3293a57c4c76d9f6a032528c07",
+			"keccak256": "0x826b3f9c9533e304197d39ba0e789c23b327fe0ab28e0d9a99d89088c434ad4a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5b48f06c5d96b91d71ce128ce586494975a5ba692697dbe809c8cada4cd9f391",
-				"dweb:/ipfs/QmPJLnrUFRQtAiz7LstCdaqquraLATGKTARAccbma3tmky"
+				"bzz-raw://c74a00718ce9fcb67d64ad3a9a1533a2b84da082ab28e4e469c6cd36a1d7a38c",
+				"dweb:/ipfs/QmbjuP4Xteg1gGPSihC2iE5VmhMXYVAeryhubfTELP8Mex"
 			]
 		},
 		"contracts/momo.sol": {

@@ -48,6 +48,7 @@ import {
     const [message, setMessage] = useState('');
     const [hasMetamask, setHasMetamask] = useState(false);
     const [isConnected, setIsConnected] = useState(false);
+    const [isOwner, setIsOwner] = useState(false);
     const router = useRouter();
     const [isSuccessful, setIsSuccessful] = useState('');
   
@@ -69,6 +70,20 @@ import {
         const accounts = await window.ethereum.request({ method: 'eth_accounts'});
         if (accounts.length) {
           setIsConnected(true);
+        }
+      }
+
+      async function checkOwner() {
+        if (isConnected) {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          const signer = provider.getSigner();
+          const address = '0xD51Bf6225B1f84c57f3A4F5FA73d86D5E5385837';
+          const contract = new ethers.Contract(address, abi, signer);
+          const owner = await contract.owner();
+          const signerAddress = await signer.getAddress();
+          if (owner === signerAddress) {
+            setIsOwner(true);
+          }
         }
       }
       async function donate() {
