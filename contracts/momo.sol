@@ -32,10 +32,12 @@ contract momo {
     function getDonations() external view returns (donation[] memory) {
         return donations;
     }
+
     modifier onlyOwner() {
         require(msg.sender == owner);
         _;
     }
+    
     receive() external payable {
     }
 }
