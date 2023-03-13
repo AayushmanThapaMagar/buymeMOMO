@@ -1,6 +1,5 @@
 import {
     Box,
-    useDisclosure,
     Button,
   } from '@chakra-ui/react';
   
@@ -49,49 +48,62 @@ import {
         borderWidth="1px"
         borderRadius="md"
         style = {{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
         }}
         >
-          <Button
-          variant={'link'}
-          colorScheme="teal"
-          style = {{
-            float: "right",
-          }}
-          onClick={() => router.push('/donate')}
-          >
-            Donate
-            </Button>
-            <Button
-            variant={'link'}
-            colorScheme="teal"
-            size = 'lg'
-            spacing = '20 rem'
-            onClick={() => router.push('./factory')}
+            <div
+            stlye = {{
+                marginLeft: 'auto',
+                marginRight: 'auto',
+            }}
             >
-              Deploy
-            </Button>
-          {hasMetamask ? (
-            isConnected ? ( // has metamask and is connected
-              <Button 
-              colorScheme="teal"
-              ml = 'auto'
-              isDisabled = {true}
-              >
-                Wallet Connected
-              </Button>
-            ) : ( // has metamask and not connected
-              <Button 
-              colorScheme="teal"
-              ml = 'auto'
-              onClick={() => connect()}>Connect Wallet
-              </Button>
-            )
-          ) : (""
-          // no metamask
-          )}
+                <Button
+                onClick={() => router.push('/')}
+                >
+                    Home
+                </Button>
+            </div>
+
+            <div
+                style = {{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}
+            >
+                <div>
+                    <Button
+                    onClick={() => router.push('/donate')}
+                    >
+                        Donate
+                    </Button>
+                    <Button>
+                        Deploy
+                    </Button>
+                </div>
+                <div>
+                {hasMetamask ? (
+                    isConnected ? ( // has metamask and is connected
+                    <Button 
+                    colorScheme="teal"
+                    ml = 'auto'
+                    isActive = 'false'
+                    >
+                        Wallet Connected
+                    </Button>
+                    ) : ( // has metamask and not connected
+                    <Button 
+                    colorScheme="teal"
+                    ml = 'auto'
+                    onClick={() => connect()}>Connect Wallet
+                    </Button>
+                    )
+                    ) : (""// no metamask
+                    )}
+                </div>
+            </div>
         </Box>
       </div>
       </>
