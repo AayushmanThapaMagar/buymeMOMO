@@ -1,6 +1,8 @@
 import {
     Box,
     Button,
+    IconButton,
+    Image
   } from '@chakra-ui/react';
   
   import {useEffect, useState} from 'react';
@@ -39,14 +41,13 @@ import {
       }
   
     return (
-      <>
       <div>
         <Box
         bg = "gray.100"
         p="5" 
         shadow="md"
         borderWidth="1px"
-        borderRadius="md"
+        borderRadius="md" 
         style = {{
             display: 'flex',
             justifyContent: 'space-between',
@@ -59,11 +60,13 @@ import {
                 marginRight: 'auto',
             }}
             >
-                <Button
+                <IconButton
+                icon={<Image src="https://cdn-icons-png.flaticon.com/512/3800/3800461.png" alt="logo" boxSize="50px" />}
+                variant = 'ghost'
                 onClick={() => router.push('/')}
                 >
                     Home
-                </Button>
+                </IconButton>
             </div>
 
             <div
@@ -73,14 +76,20 @@ import {
                     alignItems: 'center'
                 }}
             >
-                <div>
+                <div
+                style={{
+                  paddingRight: '25px',
+                }}
+                >
                     <Button
                     onClick={() => router.push('/donate')}
                     >
                         Donate
                     </Button>
-                    <Button>
-                        Deploy
+                    <Button
+                    onClick={() => router.push('/create')}
+                    >
+                        Create
                     </Button>
                 </div>
                 <div>
@@ -96,7 +105,6 @@ import {
                     ) : ( // has metamask and not connected
                     <Button 
                     colorScheme="teal"
-                    ml = 'auto'
                     onClick={() => connect()}>Connect Wallet
                     </Button>
                     )
@@ -106,7 +114,6 @@ import {
             </div>
         </Box>
       </div>
-      </>
     )
   }
   

@@ -1,9 +1,9 @@
 import { Button } from '@chakra-ui/react';
 import {ethers} from 'ethers';
 import {useEffect, useState} from 'react';
-import {abi} from "./abi_factory";
+import {abi} from "../abi/abi_factory";
 
-export default function Home() {
+export default function CreateContract() {
 
     const [hasMetamask, setHasMetamask] = useState(false);
     const [isConnected, setIsConnected] = useState(false);
