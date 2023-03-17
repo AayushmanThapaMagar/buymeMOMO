@@ -4,42 +4,16 @@ import {
     IconButton,
     Image
   } from '@chakra-ui/react';
-  
-  import {useEffect, useState} from 'react';
+
   import { useRouter } from 'next/router';
   
-  export default function NavBar() {
-  
-    const [hasMetamask, setHasMetamask] = useState(false);
-    const [isConnected, setIsConnected] = useState(false);
+  export default function NavBar( {
+    hasMetamask,
+    isConnected,
+    clickFunction } ) {
+
     const router = useRouter();
-  
-    useEffect(() => {{
-      checkMetamask();
-      checkConnection();
-      }});
-  
-  
-    async function checkMetamask() {
-      if (typeof(window.ethereum) !== 'undefined') {
-        setHasMetamask(true);
-      }
-    }
-  
-    async function checkConnection() {
-      const accounts = await window.ethereum.request({ method: 'eth_accounts'});
-      if (accounts.length) {
-        setIsConnected(true);
-      }
-    }
-  
-    async function connect() {
-      if (hasMetamask) {
-        await window.ethereum.request({ method: 'eth_requestAccounts'});
-        checkConnection();
-        }
-      }
-  
+
     return (
       <div>
         <Box
@@ -98,14 +72,14 @@ import {
                     <Button 
                     colorScheme="teal"
                     ml = 'auto'
-                    isActive = 'false'
+                    isActive = 'false'  
                     >
                         Wallet Connected
                     </Button>
                     ) : ( // has metamask and not connected
                     <Button 
                     colorScheme="teal"
-                    onClick={() => connect()}>Connect Wallet
+                    onClick={clickFunction}>Connect Wallet
                     </Button>
                     )
                     ) : (""// no metamask
