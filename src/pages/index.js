@@ -19,9 +19,14 @@ export default function Home() {
   }
 
   async function checkConnection() {
-    const accounts = await window.ethereum.request({ method: 'eth_accounts'});
-    if (accounts.length) {
-      setIsConnected(true);
+
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_accounts'});
+      if (accounts.length) {
+        setIsConnected(true);
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -36,7 +41,9 @@ export default function Home() {
     <>
       <NavBar 
       hasMetamask={hasMetamask}
+      setHasMetamask = {setHasMetamask}
       isConnected={isConnected}
+      setIsConnected = {setIsConnected}
       clickFunction = {connect}
       />
       

@@ -9,10 +9,15 @@ import {
   
   export default function NavBar( {
     hasMetamask,
+    setHasMetamask,
     isConnected,
+    setIsConnected,
     clickFunction } ) {
 
     const router = useRouter();
+
+    // const openMetamaskWebsite = () => 
+    // }
 
     return (
       <div>
@@ -82,7 +87,13 @@ import {
                     onClick={clickFunction}>Connect Wallet
                     </Button>
                     )
-                    ) : (""// no metamask
+                    ) : (
+                    <Button
+                    colorScheme="red"
+                    onClick={() => window.open('https://metamask.io/download.html', '_blank', 'noreferrer')}
+                    >
+                        Get Metamask
+                    </Button>
                     )}
                 </div>
             </div>

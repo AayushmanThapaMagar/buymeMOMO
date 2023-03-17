@@ -23,15 +23,23 @@ export default function CreateContract() {
     }
 
     async function checkWallet() {
-        if (typeof window.ethereum !== 'undefined') {
-            setHasMetamask(true);
+        try {
+            if (typeof window.ethereum !== 'undefined') {
+                setHasMetamask(true);
+            }
+        } catch (err) {
+            console.log(err)
         }
+
     }
     async function checkConnection(){
-        const accounts = await window.ethereum.request({ method: 'eth_accounts'});
-        if (accounts.length) {
-            setIsConnected(true);
-        }
+
+        if (hasMetamask) {
+            const accounts = await window.ethereum.request({ method: 'eth_accounts'});
+            if (accounts.length) {
+                setIsConnected(true);
+            }
+        };
     }
 
 
@@ -65,4 +73,4 @@ return (
     </Button>
     </>
     )
-} 
+}
